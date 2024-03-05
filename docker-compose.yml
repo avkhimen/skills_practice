@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${db_username}
+      POSTGRES_PASSWORD: ${db_password}
+      POSTGRES_DB: ${db_name}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  skill_prediction:
+    build:
+      context: .
+      dockerfile: ./skill_prediction/docker/Dockerfile
+    environment:
+      OPENAI_API_KEY: ${openai_api_key}
+    volumes:
+      - ./skill_prediction/app:/app
+    ports:
+      - "5800:5800"
