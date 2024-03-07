@@ -14,7 +14,7 @@ services:
   skill_prediction:
     build:
       context: .
-      dockerfile: ./skill_prediction/docker/Dockerfile
+      dockerfile: ./docker/Dockerfile
     environment:
       OPENAI_API_KEY: ${openai_api_key}
     volumes:
